@@ -52,3 +52,43 @@ commentsInput.addEventListener("keydown", function(event){
 });
 
 
+// Form Submission
+form.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    if(
+        nameInput.value.trim() === "" ||
+        emailInput.value.trim() === "" ||
+        commentsInput.value.trim() === ""
+    ){
+        alert("Please complete all fields.");
+        return;
+    }
+
+    const newEntry = document.createElement("div");
+
+    newEntry.classList.add("feedback-entry");
+
+    newEntry.innerHTML = `
+        <h3>${nameInput.value}</h3>
+        <p><strong>Email:</strong> ${emailInput.value}</p>
+        <p>${commentsInput.value}</p>
+    `;
+
+    feedbackDisplay.appendChild(newEntry);
+
+    form.reset();
+    charCount.textContent = "0";
+
+});
+
+
+// Stop Propagation
+form.addEventListener("click", function(event){
+    event.stopPropagation();
+});
+
+document.body.addEventListener("click", function(){
+    console.log("Background clicked.");
+});
